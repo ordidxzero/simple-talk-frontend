@@ -1,10 +1,10 @@
 import { checkAsync, loginAsync, logout, registerAsync } from './actions';
-import { ThunkReturnType } from './types';
+import { AuthThunkReturnType } from './types';
 import { AuthThunkParams } from '../../../@types';
 import * as authAPI from '../../api/auth';
 import { finishLoading, startLoading } from '../loading';
 
-export const loginThunk = (data: AuthThunkParams): ThunkReturnType => {
+export const loginThunk = (data: AuthThunkParams): AuthThunkReturnType => {
   return async dispatch => {
     const { request, success, failure } = loginAsync;
     dispatch(startLoading('login'));
@@ -14,12 +14,13 @@ export const loginThunk = (data: AuthThunkParams): ThunkReturnType => {
       dispatch(success(response));
     } catch (e) {
       dispatch(failure(e));
+    } finally {
       dispatch(finishLoading('login'));
     }
   };
 };
 
-export const registerThunk = (data: AuthThunkParams): ThunkReturnType => {
+export const registerThunk = (data: AuthThunkParams): AuthThunkReturnType => {
   return async dispatch => {
     const { request, success, failure } = registerAsync;
     dispatch(startLoading('register'));
@@ -29,12 +30,13 @@ export const registerThunk = (data: AuthThunkParams): ThunkReturnType => {
       dispatch(success(response));
     } catch (e) {
       dispatch(failure(e));
+    } finally {
       dispatch(finishLoading('register'));
     }
   };
 };
 
-export const checkThunk = (): ThunkReturnType => {
+export const checkThunk = (): AuthThunkReturnType => {
   return async dispatch => {
     const { request, success, failure } = checkAsync;
     dispatch(startLoading('check'));
@@ -45,12 +47,13 @@ export const checkThunk = (): ThunkReturnType => {
     } catch (e) {
       dispatch(failure(e));
       localStorage.removeItem('simple_talk_auth');
+    } finally {
       dispatch(finishLoading('check'));
     }
   };
 };
 
-export const logoutThunk = (): ThunkReturnType => {
+export const logoutThunk = (): AuthThunkReturnType => {
   return async dispatch => {
     dispatch(startLoading('logout'));
     await authAPI.logout();

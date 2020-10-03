@@ -1,18 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
-import MainHeaderContainer from '../containers/base/MainHeaderContainer';
+import HomeTemplate from '../components/home/HomeTemplate';
+import LeftMenu from '../components/home/LeftMenu';
+import RightContent from '../components/home/RightContent';
 
 function HomePage() {
   return (
-    <Container>
-      <MainHeaderContainer />
-    </Container>
+    <HomeTemplate>
+      <LeftMenu />
+      <RightContent />
+    </HomeTemplate>
   );
 }
-
-const Container = styled.main`
-  width: 100%;
-  height: 100%;
-`;
 
 export default HomePage;

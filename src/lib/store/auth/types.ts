@@ -6,7 +6,7 @@ import { LoadingAction } from '../loading';
 import * as actions from './actions';
 import { RootState } from '..';
 
-export type ThunkReturnType = ThunkAction<void, RootState, null, AuthAction | LoadingAction>;
+export type AuthThunkReturnType = ThunkAction<void, RootState, null, AuthAction | LoadingAction>;
 
 export type AuthAction = ActionType<typeof actions>;
 

@@ -5,9 +5,10 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import input from './input';
 import loading from './loading';
+import user from './user';
 import auth, { checkAsync, tempSetUser } from './auth';
 
-const rootReducer = combineReducers({ input, loading, auth });
+const rootReducer = combineReducers({ input, loading, auth, user });
 
 export type RootState = ReturnType<typeof rootReducer>;
 

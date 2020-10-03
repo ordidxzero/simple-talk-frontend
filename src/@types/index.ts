@@ -9,4 +9,10 @@ export type AuthFormData = {
   password: string;
 };
 
+export type UserResponse = {
+  _id: string;
+  username: string;
+  avatarUrl: string;
+};
+
 export type AuthThunkParams = AuthFormData;

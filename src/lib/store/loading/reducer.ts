@@ -7,6 +7,11 @@ const initialState: LoadingState = {
   register: false,
   check: false,
   logout: false,
+  loadFriends: false,
+  findUsers: false,
+  addFriend: false,
+  acceptFriend: false,
+  removeFriend: false,
 };
 
 const loadingReducer = createReducer<LoadingState, LoadingAction>(initialState, {

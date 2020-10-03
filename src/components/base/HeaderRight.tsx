@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Avatar, Button, Menu, Dropdown } from 'antd';
+import { Button, Menu, Dropdown } from 'antd';
 import useReduxState from '../../hooks/common/useReduxState';
 import { logoutThunk } from '../../lib/store/auth';
+import StyledAvatar from '../common/StyledAvatar';
 
 function HeaderRight() {
   const {
@@ -36,10 +36,5 @@ function HeaderRight() {
     </Button>
   );
 }
-
-const StyledAvatar = styled(Avatar)`
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-`;
 
 export default HeaderRight;
