@@ -1,5 +1,14 @@
 import { createReducer } from 'typesafe-actions';
-import { LOGIN_FAILURE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_SUCCESS } from './actions';
+import {
+  CHECK_FAILURE,
+  CHECK_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_FAILURE,
+  REGISTER_SUCCESS,
+  TEMP_SET_USER,
+} from './actions';
 import { AuthAction, AuthState } from './types';
 
 const initialState: AuthState = {
@@ -8,10 +17,14 @@ const initialState: AuthState = {
 };
 
 const authReducer = createReducer<AuthState, AuthAction>(initialState, {
-  [REGISTER_SUCCESS]: (state, { payload: { data: auth } }) => ({ ...state, auth }),
+  [TEMP_SET_USER]: (state, { payload: auth }) => ({ ...state, auth }),
+  [LOGOUT]: state => ({ ...state, auth: null, authError: null }),
+  [REGISTER_SUCCESS]: (state, { payload: { data: auth } }) => ({ ...state, auth, authError: null }),
   [REGISTER_FAILURE]: (state, { payload: authError }) => ({ ...state, authError }),
-  [LOGIN_SUCCESS]: (state, { payload: { data: auth } }) => ({ ...state, auth }),
+  [LOGIN_SUCCESS]: (state, { payload: { data: auth } }) => ({ ...state, auth, authError: null }),
   [LOGIN_FAILURE]: (state, { payload: authError }) => ({ ...state, authError }),
+  [CHECK_SUCCESS]: (state, { payload: { data: auth } }) => ({ ...state, auth, authError: null }),
+  [CHECK_FAILURE]: (state, { payload: authError }) => ({ ...state, authError }),
 });
 
 export default authReducer;

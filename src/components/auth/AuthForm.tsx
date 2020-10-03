@@ -4,13 +4,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Input, Space, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
-import { AuthThunkParams } from '../../@types';
 import useInput from '../../hooks/common/useInput';
 
 type AuthFormProps = {
   type: 'login' | 'register';
   error?: string;
-  onSubmit: (data: AuthThunkParams) => any;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => any;
   loading: boolean;
 };
 
@@ -36,15 +35,18 @@ const Footer = styled.footer`
   }
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+`;
+
 function AuthForm({ type, onSubmit, error, loading }: AuthFormProps) {
   const { onChange, form } = useInput();
-  const onClick = () => {
-    onSubmit({ type, username: form.username, password: form.password });
-  };
   return (
     <Container>
       <h3>{type}</h3>
-      <form>
+      <form onSubmit={onSubmit}>
         <Space direction="vertical" style={{ width: '100%' }}>
           <Input placeholder="ID" prefix={<UserOutlined />} name="username" value={form.username} onChange={onChange} />
           <Input.Password
@@ -63,8 +65,9 @@ function AuthForm({ type, onSubmit, error, loading }: AuthFormProps) {
               onChange={onChange}
             />
           )}
-          <Button style={{ width: '100%' }} onClick={onClick} type="primary" loading={loading}>
-            {type === 'login' ? <Link to="/">Login</Link> : <Link to="/">Register & Login</Link>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <Button style={{ width: '100%' }} type="primary" loading={loading} htmlType="submit">
+            {type === 'login' ? 'Login' : 'Register & Login'}
           </Button>
         </Space>
       </form>

@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 import styled from 'styled-components';
 import ResultModal from './ResultModal';
-import { mediaQuery } from '../../lib/styles/media';
+import { media, mediaQuery } from '../../lib/styles/media';
+import useInput from '../../hooks/common/useInput';
 
 const { Search } = Input;
 
 function SearchInput() {
   const [visible, setVisible] = useState(false);
+  const { onChange, form } = useInput();
   return (
     <>
-      <Container placeholder="Search username" onSearch={() => setVisible(true)} />
+      <Container
+        placeholder="Search username"
+        onSearch={() => setVisible(true)}
+        name="search"
+        onChange={onChange}
+        value={form.search}
+        disabled={visible}
+      />
       <ResultModal visible={visible} setVisible={setVisible} />
     </>
   );
@@ -23,7 +32,7 @@ const Container = styled(Search)`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  ${mediaQuery(768)} {
+  ${mediaQuery(media.medium)} {
     width: 70%;
   }
 `;

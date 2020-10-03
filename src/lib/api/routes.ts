@@ -3,6 +3,7 @@ const GLOBAL = '/';
 const REGISTER = 'register';
 const LOGIN = 'login';
 const LOGOUT = 'logout';
+const CHECK = 'check';
 
 // User
 const USER = '/user';
@@ -17,6 +18,7 @@ const routes = {
   registerRoute: REGISTER,
   loginRoute: LOGIN,
   logoutRoute: LOGOUT,
+  checkRoute: CHECK,
   user: USER,
   loadFriendsRoute: LOAD_FRIENDS,
   findRoute: FIND,

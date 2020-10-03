@@ -1,14 +1,10 @@
 import { AxiosError } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
+import { AuthResponse } from '../../../@types';
 import { LoadingAction } from '../loading';
 import * as actions from './actions';
 import { RootState } from '..';
-
-export type AuthResponse = {
-  _id: string;
-  username: string;
-};
 
 export type ThunkReturnType = ThunkAction<void, RootState, null, AuthAction | LoadingAction>;
 

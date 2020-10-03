@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Modal, Spin } from 'antd';
+import useReduxState from '../../hooks/common/useReduxState';
 
 function ResultModal({
   visible,
@@ -9,6 +10,9 @@ function ResultModal({
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const {
+    input: { search },
+  } = useReduxState();
   const onOk = () => setVisible(false);
   const onCancel = () => setVisible(false);
   useEffect(() => {
@@ -19,6 +23,7 @@ function ResultModal({
   return (
     <Modal title="Search Result" visible={visible} onOk={onOk} onCancel={onCancel}>
       <Container>
+        {search}
         <Spin />
       </Container>
     </Modal>

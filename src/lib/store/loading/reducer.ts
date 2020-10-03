@@ -5,6 +5,8 @@ import { LoadingAction, LoadingState } from './types';
 const initialState: LoadingState = {
   login: false,
   register: false,
+  check: false,
+  logout: false,
 };
 
 const loadingReducer = createReducer<LoadingState, LoadingAction>(initialState, {

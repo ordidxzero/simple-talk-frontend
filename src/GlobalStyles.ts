@@ -12,6 +12,7 @@ body {
 }
 * {
   box-sizing: inherit;
+  user-select: none;
 }
 code {
   font-family: 'Fira Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
