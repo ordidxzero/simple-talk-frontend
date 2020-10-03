@@ -6,6 +6,7 @@ import { CommentOutlined, UserOutlined } from '@ant-design/icons';
 import { loadFriendsThunk } from '../../lib/store/user/thunks';
 import useReduxState from '../../hooks/common/useReduxState';
 import Friend from './Friend';
+import Recommanded from './Recommanded';
 
 const { SubMenu } = Menu;
 
@@ -26,7 +27,7 @@ function LeftMenu() {
       </SubMenu>
       <SubMenu key="sub2" icon={<UserOutlined />} title="Recommanded Users">
         {recommanded.map(friend => (
-          <Menu.Item key={friend._id}>{friend.username}</Menu.Item>
+          <Recommanded key={friend._id} user={friend} />
         ))}
       </SubMenu>
       <SubMenu key="sub3" icon={<CommentOutlined />} title="Chatrooms">

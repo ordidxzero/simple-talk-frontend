@@ -37,9 +37,17 @@ const userReducer = createReducer<UserState, UserAction>(initialState, {
     const newFriends = state.friends.concat(data).sort((a, b) => (a.username > b.username ? 1 : -1));
     return { ...state, friends: newFriends, recommanded: newRecomanded, userError: null };
   },
-  [REMOVE_FRIEND_SUCCESS]: (state, { payload: { data } }) => {
-    const newFriends = state.friends.filter(user => user._id !== data._id);
-    return { ...state, friends: newFriends, userError: null };
+  [REMOVE_FRIEND_SUCCESS]: (
+    state,
+    {
+      payload: {
+        type,
+        response: { data },
+      },
+    },
+  ) => {
+    const newFriends = state[type].filter(user => user._id !== data._id);
+    return { ...state, [type]: newFriends, userError: null };
   },
 });
 

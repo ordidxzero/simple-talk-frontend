@@ -8,5 +8,7 @@
 - [ ] HeaderLogo
   - [ ] max-width가 768px이면 로고 자리에 Menu toggler 넣어도 될 듯
     - [ ] [이거](https://ant.design/components/menu/#components-menu-demo-inline-collapsed)
-- [ ] Menu
-  - [ ] Dropdown
+- [ ] Notifications
+  - [ ] Request Friend
+  - [ ] Accept Friend
+  - [ ] Remove Friend

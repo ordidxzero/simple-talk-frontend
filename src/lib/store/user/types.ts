@@ -4,11 +4,16 @@ import { UserResponse } from '../../../@types';
 import { LoadingAction } from '../loading';
 import * as actions from './actions';
 import { RootState } from '..';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 export type LoadFriendsResponse = {
   friends: UserResponse[];
   recommanded: UserResponse[];
+};
+
+export type RemoveFriendRespnse = {
+  type: 'friends' | 'recommanded';
+  response: AxiosResponse<UserResponse>;
 };
 
 export type UserThunkReturnType = ThunkAction<void, RootState, null, UserAction | LoadingAction>;

@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { createAsyncAction } from 'typesafe-actions';
 import { UserResponse } from '../../../@types';
-import { LoadFriendsResponse } from './types';
+import { LoadFriendsResponse, RemoveFriendRespnse } from './types';
 
 export const LOAD_FRIENDS_REQUEST = 'user/LOAD_FRIENDS_REQUEST';
 export const LOAD_FRIENDS_SUCCESS = 'user/LOAD_FRIENDS_SUCCESS';
@@ -49,6 +49,6 @@ export const acceptFriendAsync = createAsyncAction(ACCEPT_FRIEND_REQUEST, ACCEPT
 
 export const removeFriendAsync = createAsyncAction(REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE)<
   void,
-  AxiosResponse<UserResponse>,
+  RemoveFriendRespnse,
   AxiosError
 >();

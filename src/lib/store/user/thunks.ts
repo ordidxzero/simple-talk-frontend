@@ -67,14 +67,14 @@ export const acceptFriendThunk = (id: string): UserThunkReturnType => {
   };
 };
 
-export const removeFriendThunk = (id: string): UserThunkReturnType => {
+export const removeFriendThunk = (type: 'friends' | 'recommanded', id: string): UserThunkReturnType => {
   return async dispatch => {
     const { request, success, failure } = removeFriendAsync;
     dispatch(startLoading('removeFriend'));
     dispatch(request());
     try {
       const response = await userAPI.removeFriend(id);
-      dispatch(success(response));
+      dispatch(success({ type, response }));
     } catch (e) {
       dispatch(failure(e));
     } finally {
