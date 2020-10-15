@@ -16,3 +16,9 @@ export type UserResponse = {
 };
 
 export type AuthThunkParams = AuthFormData;
+
+export type MessageData = {
+  user: string;
+  text: string;
+  createdAt: number;
+};

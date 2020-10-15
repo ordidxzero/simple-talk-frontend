@@ -1,23 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Menu } from 'antd';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { CommentOutlined, UserOutlined } from '@ant-design/icons';
-import { loadFriendsThunk } from '../../lib/store/user/thunks';
 import useReduxState from '../../hooks/common/useReduxState';
 import Friend from './Friend';
 import Recommanded from './Recommanded';
+import Room from './Room';
 
 const { SubMenu } = Menu;
 
 function LeftMenu() {
-  const dispatch = useDispatch();
   const {
     user: { friends, recommanded },
+    chat: { rooms },
+    auth: { auth },
   } = useReduxState();
-  useEffect(() => {
-    dispatch(loadFriendsThunk());
-  }, [dispatch]);
   return (
     <StyledMenu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline">
       <SubMenu key="sub1" icon={<UserOutlined />} title="Friends">
@@ -31,10 +28,10 @@ function LeftMenu() {
         ))}
       </SubMenu>
       <SubMenu key="sub3" icon={<CommentOutlined />} title="Chatrooms">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <Menu.Item key="7">Option 7</Menu.Item>
-        <Menu.Item key="8">Option 8</Menu.Item>
+        {rooms.map(({ _id, participants }) => {
+          const opponent = participants.filter(member => member._id !== auth?._id);
+          return <Room key={_id} roomId={_id} opponent={opponent} />;
+        })}
       </SubMenu>
     </StyledMenu>
   );

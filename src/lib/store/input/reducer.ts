@@ -7,6 +7,7 @@ const initialState: InputState = {
   password: '',
   passwordConfirm: '',
   search: '',
+  chat: '',
 };
 
 const inputReducer = createReducer<InputState, InputAction>(initialState, {

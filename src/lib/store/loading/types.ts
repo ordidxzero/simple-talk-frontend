@@ -9,10 +9,13 @@ export type LoadingState = {
   check: boolean;
   logout: boolean;
   loadFriends: boolean;
+  loadRooms: boolean;
   findUsers: boolean;
   addFriend: boolean;
   acceptFriend: boolean;
   removeFriend: boolean;
+  startChat: boolean;
+  leaveChat: boolean;
 };
 
 export type StartLoadingPayload = keyof LoadingState;

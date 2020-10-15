@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import 'antd/dist/antd.css';
 import GlobalStyles from './GlobalStyles';
-import ReduxProvider from './lib/store';
+import Wrapper from './lib/store';
 
 ReactDOM.render(
   <>
     <GlobalStyles />
-    <ReduxProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ReduxProvider>
+    <Wrapper>
+      <App />
+    </Wrapper>
   </>,
   document.getElementById('root'),
 );

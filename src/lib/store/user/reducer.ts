@@ -10,6 +10,7 @@ import {
   LOAD_FRIENDS_SUCCESS,
   REMOVE_FRIEND_FAILURE,
   REMOVE_FRIEND_SUCCESS,
+  RESET_SEARCH_RESULT,
 } from './actions';
 import { UserAction, UserState } from './types';
 
@@ -21,6 +22,7 @@ const initialState: UserState = {
 };
 
 const userReducer = createReducer<UserState, UserAction>(initialState, {
+  [RESET_SEARCH_RESULT]: state => ({ ...state, searchResult: [] }),
   [LOAD_FRIENDS_FAILURE]: (state, { payload: userError }) => ({ ...state, userError }),
   [FIND_USERS_FAILURE]: (state, { payload: userError }) => ({ ...state, userError }),
   [ADD_FRIEND_FAILURE]: (state, { payload: userError }) => ({ ...state, userError }),

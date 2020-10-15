@@ -1,8 +1,9 @@
 import { checkAsync, loginAsync, logout, registerAsync } from './actions';
-import { AuthThunkReturnType } from './types';
+import { AuthThunkReturnType, CheckThunkReturnType } from './types';
 import { AuthThunkParams } from '../../../@types';
 import * as authAPI from '../../api/auth';
 import { finishLoading, startLoading } from '../loading';
+import { connectSocket } from '../../api/socket';
 
 export const loginThunk = (data: AuthThunkParams): AuthThunkReturnType => {
   return async dispatch => {
@@ -12,6 +13,7 @@ export const loginThunk = (data: AuthThunkParams): AuthThunkReturnType => {
     try {
       const response = await authAPI.login(data);
       dispatch(success(response));
+      connectSocket(dispatch);
     } catch (e) {
       dispatch(failure(e));
     } finally {
@@ -36,7 +38,7 @@ export const registerThunk = (data: AuthThunkParams): AuthThunkReturnType => {
   };
 };
 
-export const checkThunk = (): AuthThunkReturnType => {
+export const checkThunk = (): CheckThunkReturnType => {
   return async dispatch => {
     const { request, success, failure } = checkAsync;
     dispatch(startLoading('check'));
@@ -44,6 +46,7 @@ export const checkThunk = (): AuthThunkReturnType => {
     try {
       const response = await authAPI.check();
       dispatch(success(response));
+      connectSocket(dispatch);
     } catch (e) {
       dispatch(failure(e));
       localStorage.removeItem('simple_talk_auth');

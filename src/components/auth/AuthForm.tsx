@@ -66,7 +66,7 @@ function AuthForm({ type, onSubmit, error, loading }: AuthFormProps) {
             />
           )}
           {error && <ErrorMessage>{error}</ErrorMessage>}
-          <Button style={{ width: '100%' }} type="primary" loading={loading} htmlType="submit">
+          <Button type="primary" loading={loading} htmlType="submit" block>
             {type === 'login' ? 'Login' : 'Register & Login'}
           </Button>
         </Space>

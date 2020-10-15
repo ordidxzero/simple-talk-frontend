@@ -30,6 +30,7 @@ const Container = styled.header`
   width: 100%;
   height: 3rem;
   padding: 0 1rem;
+  z-index: 100;
 `;
 
 const Spacer = styled.div`

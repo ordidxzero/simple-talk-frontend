@@ -8,10 +8,13 @@ const initialState: LoadingState = {
   check: false,
   logout: false,
   loadFriends: false,
+  loadRooms: false,
   findUsers: false,
   addFriend: false,
   acceptFriend: false,
   removeFriend: false,
+  startChat: false,
+  leaveChat: false,
 };
 
 const loadingReducer = createReducer<LoadingState, LoadingAction>(initialState, {

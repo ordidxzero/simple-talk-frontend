@@ -8,6 +8,7 @@ export type InputState = {
   password: string;
   passwordConfirm: string;
   search: string;
+  chat: string;
 };
 
 export type ChangeTextPayload = { key: string; value: string };

@@ -1,7 +1,9 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { createAsyncAction } from 'typesafe-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 import { UserResponse } from '../../../@types';
 import { LoadFriendsResponse, RemoveFriendRespnse } from './types';
+
+export const RESET_SEARCH_RESULT = 'user/RESET_SEARCH_RESULT';
 
 export const LOAD_FRIENDS_REQUEST = 'user/LOAD_FRIENDS_REQUEST';
 export const LOAD_FRIENDS_SUCCESS = 'user/LOAD_FRIENDS_SUCCESS';
@@ -22,6 +24,8 @@ export const ACCEPT_FRIEND_FAILURE = 'user/ACCEPT_FRIEND_FAILURE';
 export const REMOVE_FRIEND_REQUEST = 'user/REMOVE_FRIEND_REQUEST';
 export const REMOVE_FRIEND_SUCCESS = 'user/REMOVE_FRIEND_SUCCESS';
 export const REMOVE_FRIEND_FAILURE = 'user/REMOVE_FRIEND_FAILURE';
+
+export const resetSearchResult = createAction(RESET_SEARCH_RESULT)();
 
 export const loadFriendsAsync = createAsyncAction(LOAD_FRIENDS_REQUEST, LOAD_FRIENDS_SUCCESS, LOAD_FRIENDS_FAILURE)<
   void,

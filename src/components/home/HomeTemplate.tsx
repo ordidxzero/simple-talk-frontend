@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import useReduxState from '../../hooks/common/useReduxState';
+import { loadRoomsThunk } from '../../lib/store/chat';
+import { loadFriendsThunk } from '../../lib/store/user/thunks';
 import MainHeader from '../base/MainHeader';
 
 type HomeTemplateProps = {
@@ -7,6 +12,23 @@ type HomeTemplateProps = {
 };
 
 function HomeTemplate({ children }: HomeTemplateProps) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const {
+    auth: { auth, authError },
+  } = useReduxState();
+
+  useEffect(() => {
+    dispatch(loadFriendsThunk());
+    dispatch(loadRoomsThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (authError || !auth) {
+      history.push('/login');
+    }
+  }, [auth, authError, history]);
+
   return (
     <Container>
       <MainHeader />

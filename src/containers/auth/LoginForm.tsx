@@ -31,7 +31,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (authError) {
-      if (authError.response?.status === 401) {
+      if (authError.response?.status === 400) {
         setError('ID와 PW 정보가 일치하지 않습니다.');
         return;
       }

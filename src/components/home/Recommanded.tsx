@@ -19,12 +19,12 @@ function Recommanded({ user, ...props }: RecommandedProps) {
   const onRemove = () => dispatch(removeFriendThunk('recommanded', user._id));
   const content = (
     <Space style={{ width: '100%' }} direction="vertical">
-      <StyledButton type="primary" icon={<UserAddOutlined />} onClick={onAccpet}>
+      <Button type="primary" icon={<UserAddOutlined />} onClick={onAccpet} block>
         친구 추가하기
-      </StyledButton>
-      <StyledButton type="primary" icon={<UserDeleteOutlined />} onClick={onRemove} danger>
+      </Button>
+      <Button type="primary" icon={<UserDeleteOutlined />} onClick={onRemove} danger block>
         삭제하기
-      </StyledButton>
+      </Button>
     </Space>
   );
   return (
@@ -45,10 +45,6 @@ const StyledItem = styled(Item)`
     flex: 1;
     padding-left: 1rem;
   }
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
 `;
 
 export default Recommanded;

@@ -12,3 +12,9 @@
   - [ ] Request Friend
   - [ ] Accept Friend
   - [ ] Remove Friend
+
+## BUG
+
+- [ ] 로그인을 하지 않은 상태에서 홈으로 가면 에러
+  - [ ] 타입 어썰션으로 auth의 null값을 강제로 AuthResponse로 바꿔서 destructuring을 한 게 문제인 듯
+- [ ] Logout이 제대로 안됨

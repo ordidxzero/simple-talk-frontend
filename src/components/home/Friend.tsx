@@ -6,6 +6,8 @@ import { UserDeleteOutlined, MessageOutlined } from '@ant-design/icons';
 import { UserResponse } from '../../@types';
 import StyledAvatar from '../common/StyledAvatar';
 import { removeFriendThunk } from '../../lib/store/user/thunks';
+import { startChatThunk } from '../../lib/store/chat';
+import useReduxState from '../../hooks/common/useReduxState';
 
 type FriendProps = {
   user: UserResponse;
@@ -15,15 +17,20 @@ const { Item } = Menu;
 
 function Friend({ user, ...props }: FriendProps) {
   const dispatch = useDispatch();
+  const {
+    loading: { startChat },
+  } = useReduxState();
+
   const onRemove = () => dispatch(removeFriendThunk('friends', user._id));
+  const onStartChat = () => dispatch(startChatThunk(user._id));
   const content = (
     <Space style={{ width: '100%' }} direction="vertical">
-      <StyledButton type="primary" icon={<MessageOutlined />}>
+      <Button type="primary" icon={<MessageOutlined />} block onClick={onStartChat} loading={startChat}>
         채팅하기
-      </StyledButton>
-      <StyledButton type="primary" icon={<UserDeleteOutlined />} onClick={onRemove} danger>
+      </Button>
+      <Button type="primary" icon={<UserDeleteOutlined />} onClick={onRemove} danger block>
         삭제하기
-      </StyledButton>
+      </Button>
     </Space>
   );
   return (
@@ -46,8 +53,4 @@ const StyledItem = styled(Item)`
   }
 `;
 
-const StyledButton = styled(Button)`
-  width: 100%;
-`;
-
-export default Friend;
+export default React.memo(Friend);

@@ -16,7 +16,9 @@ function FoundFriend({ user }: FoundFriendProps) {
   const {
     loading: { addFriend: loading },
     user: { friends, recommanded },
+    auth: { auth },
   } = useReduxState();
+  const isMe = auth?._id === user._id;
   const isFriend = friends.find(friend => friend._id === user._id);
   const isRecommanded = recommanded.find(friend => friend._id === user._id);
   const onClick = () => {
@@ -33,8 +35,8 @@ function FoundFriend({ user }: FoundFriendProps) {
       <div className="username">{user.username}</div>
       <Button
         type="primary"
-        icon={isFriend ? <CheckOutlined /> : <UserAddOutlined />}
-        disabled={isFriend ? true : false}
+        icon={isFriend || isMe ? <CheckOutlined /> : <UserAddOutlined />}
+        disabled={isFriend || isMe ? true : false}
         loading={loading}
         onClick={onClick}
       />
