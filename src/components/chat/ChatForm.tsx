@@ -29,6 +29,9 @@ function ChatForm() {
     onManualChange('chat', '');
   };
   const onPressEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!chat) {
+      return event.preventDefault();
+    }
     if (!event.shiftKey) {
       event.preventDefault();
       onSendMessage();
@@ -59,10 +62,12 @@ const Container = styled.div`
   z-index: 100;
   border-top: 1px solid ${palette.gray[2]};
   background-color: white;
+  .ant-input-textarea {
+    width: 100%;
+  }
 `;
 
 const StyledTextArea = styled(TextArea)`
-  width: 100%;
   margin-bottom: 8px;
 `;
 

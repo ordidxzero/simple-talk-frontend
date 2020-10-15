@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import useScrollToBottom from '../../hooks/chat/useScrollToBottom';
 import useReduxState from '../../hooks/common/useReduxState';
 import Message from './Message';
 
@@ -10,9 +11,10 @@ function ChatScreen() {
     chat: { rooms },
     auth: { auth },
   } = useReduxState();
+  const chatScreenRef = useScrollToBottom();
   const room = rooms.find(r => r._id === roomId);
   return (
-    <Container>
+    <Container ref={chatScreenRef}>
       {room &&
         room.messages.map(({ text, user, createdAt }) => (
           <Message key={`${user}-${createdAt}`} isMe={auth?._id === user} text={text} />
@@ -32,4 +34,4 @@ const Container = styled.div`
   overflow: auto;
 `;
 
-export default ChatScreen;
+export default React.memo(ChatScreen);
