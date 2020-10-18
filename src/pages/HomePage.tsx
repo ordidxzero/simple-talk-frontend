@@ -1,7 +1,7 @@
 import React from 'react';
-import HomeTemplate from '../components/home/HomeTemplate';
-import LeftMenu from '../components/home/LeftMenu';
-import RightContent from '../components/home/RightContent';
+import HomeTemplate from '../home/components/HomeTemplate';
+import LeftMenu from '../home/components/LeftMenu';
+import RightContent from '../home/components/RightContent';
 
 function HomePage() {
   return (

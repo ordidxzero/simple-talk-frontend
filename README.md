@@ -1,5 +1,13 @@
 # SIMPLE TALK FRONTEND
 
+# UPDATE NOTE
+
+- 1.0.0
+  - 프로토타입 완성
+- 1.1.0
+  - 프로젝트 폴더 구조 변경
+  - login되지 않았을 때 home으로 가면 발생하는 에러 해결
+
 ## TO DO
 
 - [ ] 배치는 슬랙처럼.
@@ -15,6 +23,5 @@
 
 ## BUG
 
-- [ ] 로그인을 하지 않은 상태에서 홈으로 가면 에러
-  - [ ] 타입 어썰션으로 auth의 null값을 강제로 AuthResponse로 바꿔서 destructuring을 한 게 문제인 듯
 - [ ] Logout이 제대로 안됨
+- [ ] 채팅이 올 때마다 useScrollToBottom은 잘 작동하지만, 처음 마운트 될 땐 작동하지 않음.. 아마 data를 불러 오기 전에 실행되기 때문에 그런 듯
