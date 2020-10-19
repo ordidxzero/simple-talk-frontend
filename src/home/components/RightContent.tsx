@@ -1,14 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import ChatForm from './chat/ChatForm';
 import ChatScreen from './chat/ChatScreen';
 
 function RightContent() {
+  const { roomId } = useParams<{ roomId: string | undefined }>();
   return (
     <Container>
-      <ChatScreen />
-      <ChatForm />
+      {roomId && (
+        <>
+          <ChatScreen />
+          <ChatForm />
+        </>
+      )}
     </Container>
   );
 }
