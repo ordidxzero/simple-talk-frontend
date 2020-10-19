@@ -31,7 +31,7 @@ function RegisterForm() {
 
   useEffect(() => {
     initializeForm();
-  }, []);
+  }, [initializeForm]);
 
   useEffect(() => {
     if (authError) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { SendOutlined } from '@ant-design/icons';
 import palette from '../../../lib/styles/palette';
 import useReduxState from '../../../common/hooks/useReduxState';
@@ -13,7 +13,6 @@ const { TextArea } = Input;
 
 function ChatForm() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const {
     form: { chat },
     onChange,
@@ -23,14 +22,11 @@ function ChatForm() {
     auth: { auth },
   } = useReduxState();
   const { roomId } = useParams<{ roomId: string }>();
-  if (!auth) {
-    history.push('/login');
-    return <div>Please Login</div>;
-  }
-  const { _id } = auth;
   const onSendMessage = () => {
-    sendMessage(dispatch)({ user: _id, text: chat, room: roomId, createdAt: Date.now() });
-    onManualChange('chat', '');
+    if (auth) {
+      sendMessage(dispatch)({ user: auth._id, text: chat, room: roomId, createdAt: Date.now() });
+      onManualChange('chat', '');
+    }
   };
   const onPressEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (!chat) {
@@ -41,6 +37,7 @@ function ChatForm() {
       onSendMessage();
     }
   };
+
   return (
     <Container>
       <StyledTextArea

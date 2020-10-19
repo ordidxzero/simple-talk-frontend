@@ -19,7 +19,7 @@ function HomeTemplate({ children }: HomeTemplateProps) {
   useEffect(() => {
     loadFriends();
     loadRooms();
-  }, []);
+  }, [loadFriends, loadRooms]);
 
   useEffect(() => {
     if (authError || !auth) {

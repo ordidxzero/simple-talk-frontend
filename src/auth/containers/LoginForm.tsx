@@ -25,7 +25,7 @@ function LoginForm() {
 
   useEffect(() => {
     initializeForm();
-  }, []);
+  }, [initializeForm]);
 
   useEffect(() => {
     if (authError) {
