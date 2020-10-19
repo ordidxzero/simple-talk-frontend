@@ -1,18 +1,17 @@
 import React from 'react';
 import { Button } from 'antd';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { UserAddOutlined, CheckOutlined } from '@ant-design/icons';
-import { acceptFriendThunk, addFriendThunk } from '../../lib/store/user/thunks';
 import useReduxState from '../../common/hooks/useReduxState';
 import palette from '../../lib/styles/palette';
 import { UserResponse } from '../../@types';
 import StyledAvatar from '../../common/components/StyledAvatar';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 type FoundFriendProps = { user: UserResponse };
 
 function FoundFriend({ user }: FoundFriendProps) {
-  const dispatch = useDispatch();
+  const { acceptFriend, addFriend } = useReduxAction();
   const {
     loading: { addFriend: loading },
     user: { friends, recommanded },
@@ -23,10 +22,10 @@ function FoundFriend({ user }: FoundFriendProps) {
   const isRecommanded = recommanded.find(friend => friend._id === user._id);
   const onClick = () => {
     if (isRecommanded) {
-      dispatch(acceptFriendThunk(user._id));
+      acceptFriend(user._id);
       return;
     }
-    dispatch(addFriendThunk(user._id));
+    addFriend(user._id);
     return;
   };
   return (

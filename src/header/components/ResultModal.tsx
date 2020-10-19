@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { Empty, Modal, Spin } from 'antd';
 import useReduxState from '../../common/hooks/useReduxState';
-import { resetSearchResult } from '../../lib/store/user';
 import FoundFriend from './FoundFriend';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 function ResultModal({
   visible,
@@ -17,10 +16,10 @@ function ResultModal({
     loading: { findUsers: loading },
     user: { searchResult },
   } = useReduxState();
-  const dispatch = useDispatch();
+  const { resetSearchResult } = useReduxAction();
   const onClose = () => {
     setVisible(false);
-    setTimeout(() => dispatch(resetSearchResult()), 200);
+    setTimeout(resetSearchResult, 200);
   };
   return (
     <Modal title="Search Result" visible={visible} onOk={onClose} onCancel={onClose} zIndex={1000}>

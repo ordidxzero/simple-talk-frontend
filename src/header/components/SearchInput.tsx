@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Input } from 'antd';
 import ResultModal from './ResultModal';
-import { findUsersThunk } from '../../lib/store/user/thunks';
 import { media, mediaQuery } from '../../lib/styles/media';
 import useInput from '../../common/hooks/useInput';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 const { Search } = Input;
 
 function SearchInput() {
-  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
+  const { findUsers } = useReduxAction();
   const { onChange, form } = useInput();
   const onSearch = () => {
     setVisible(true);
-    dispatch(findUsersThunk(form.search));
+    findUsers(form.search);
   };
   return (
     <>

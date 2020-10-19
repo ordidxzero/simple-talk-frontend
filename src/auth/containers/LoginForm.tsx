@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import AuthForm from '../components/AuthForm';
-import useReduxState from '../../common/hooks/useReduxState';
 import useAuth from '../hooks/useAuth';
+import useLoading from '../../common/hooks/useLoading';
+import useInput from '../../common/hooks/useInput';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 function LoginForm() {
+  const { authError } = useAuth();
+  const { login: loading } = useLoading();
   const [error, setError] = useState<string>();
-  const { authError, login } = useAuth();
-  const form = useReduxState();
-
-  const { username, password } = form.input;
-  const { login: loading } = form.loading;
+  const { login, initializeForm } = useReduxAction();
+  const {
+    form: { username, password },
+  } = useInput();
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,6 +22,10 @@ function LoginForm() {
     }
     login({ username, password });
   };
+
+  useEffect(() => {
+    initializeForm();
+  }, []);
 
   useEffect(() => {
     if (authError) {

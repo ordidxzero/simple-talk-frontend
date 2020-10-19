@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { Button, Menu, Dropdown } from 'antd';
-import useReduxState from '../../common/hooks/useReduxState';
-import { logoutThunk } from '../../lib/store/auth';
 import StyledAvatar from '../../common/components/StyledAvatar';
+import useReduxState from '../../common/hooks/useReduxState';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 function HeaderRight() {
   const {
     auth: { auth },
   } = useReduxState();
-  const dispatch = useDispatch();
-  const onLogout = () => dispatch(logoutThunk());
+  const { logout } = useReduxAction();
 
   const menu = (
     <Menu style={{ width: 150 }}>
@@ -20,7 +18,7 @@ function HeaderRight() {
         <strong>{auth?.username}</strong>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="1" onClick={onLogout}>
+      <Menu.Item key="1" onClick={logout}>
         로그아웃
       </Menu.Item>
     </Menu>

@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { Button, Menu, Popover, Space } from 'antd';
 import { UserDeleteOutlined, MessageOutlined } from '@ant-design/icons';
 import { UserResponse } from '../../@types';
 import StyledAvatar from '../../common/components/StyledAvatar';
-import { removeFriendThunk } from '../../lib/store/user/thunks';
-import { startChatThunk } from '../../lib/store/chat';
 import useReduxState from '../../common/hooks/useReduxState';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 type FriendProps = {
   user: UserResponse;
@@ -16,16 +14,16 @@ type FriendProps = {
 const { Item } = Menu;
 
 function Friend({ user, ...props }: FriendProps) {
-  const dispatch = useDispatch();
+  const { removeFriend, startChat } = useReduxAction();
   const {
-    loading: { startChat },
+    loading: { startChat: loading },
   } = useReduxState();
 
-  const onRemove = () => dispatch(removeFriendThunk('friends', user._id));
-  const onStartChat = () => dispatch(startChatThunk(user._id));
+  const onRemove = () => removeFriend('friends', user._id);
+  const onStartChat = () => startChat(user._id);
   const content = (
     <Space style={{ width: '100%' }} direction="vertical">
-      <Button type="primary" icon={<MessageOutlined />} block onClick={onStartChat} loading={startChat}>
+      <Button type="primary" icon={<MessageOutlined />} block onClick={onStartChat} loading={loading}>
         채팅하기
       </Button>
       <Button type="primary" icon={<UserDeleteOutlined />} onClick={onRemove} danger block>

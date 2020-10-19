@@ -1,27 +1,25 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import useReduxState from '../../common/hooks/useReduxState';
-import { loadRoomsThunk } from '../../lib/store/chat';
-import { loadFriendsThunk } from '../../lib/store/user/thunks';
 import MainHeader from '../../header/components/MainHeader';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 type HomeTemplateProps = {
   children: React.ReactNode;
 };
 
 function HomeTemplate({ children }: HomeTemplateProps) {
-  const dispatch = useDispatch();
   const history = useHistory();
+  const { loadFriends, loadRooms } = useReduxAction();
   const {
     auth: { auth, authError },
   } = useReduxState();
 
   useEffect(() => {
-    dispatch(loadFriendsThunk());
-    dispatch(loadRoomsThunk());
-  }, [dispatch]);
+    loadFriends();
+    loadRooms();
+  }, []);
 
   useEffect(() => {
     if (authError || !auth) {

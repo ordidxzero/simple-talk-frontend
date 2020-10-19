@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { Button, Menu, Popover, Space } from 'antd';
 import { UserDeleteOutlined, UserAddOutlined } from '@ant-design/icons';
 import { UserResponse } from '../../@types';
 import StyledAvatar from '../../common/components/StyledAvatar';
-import { acceptFriendThunk, removeFriendThunk } from '../../lib/store/user/thunks';
+import useReduxAction from '../../common/hooks/useReduxAction';
 
 type RecommandedProps = {
   user: UserResponse;
@@ -14,9 +13,9 @@ type RecommandedProps = {
 const { Item } = Menu;
 
 function Recommanded({ user, ...props }: RecommandedProps) {
-  const dispatch = useDispatch();
-  const onAccpet = () => dispatch(acceptFriendThunk(user._id));
-  const onRemove = () => dispatch(removeFriendThunk('recommanded', user._id));
+  const { acceptFriend, removeFriend } = useReduxAction();
+  const onAccpet = () => acceptFriend(user._id);
+  const onRemove = () => removeFriend('recommanded', user._id);
   const content = (
     <Space style={{ width: '100%' }} direction="vertical">
       <Button type="primary" icon={<UserAddOutlined />} onClick={onAccpet} block>
